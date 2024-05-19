@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KÜÇÜKYALI HOTSPUR</title>
+    <title>Responsive Header with Marquee and Slider</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <header class="header">
-        <div class="logo">KÜÇÜKYALI HOTSPUR</div>
+        <div class="logo">Küçükyalı Hotspur</div>
         <nav class="nav">
             <ul>
                 <li><a href="#">Anasayfa</a></li>
@@ -23,6 +23,20 @@
 
     <div class="marquee">
         <div class="marquee-content" id="marquee-text"></div>
+    </div>
+
+    <div class="slider">
+        <div class="slides">
+            <div class="slide"><img src="image1.jpg" alt="Image 1"></div>
+            <div class="slide"><img src="image2.jpg" alt="Image 2"></div>
+            <div class="slide"><img src="image3.jpg" alt="Image 3"></div>
+        </div>
+    </div>
+    <div class="success-story">
+        <h2>Küçükyalı Hotspur</h2>
+        <p>
+            Küçükyalı Hotspur, kurucularımız Eren Özdemir ve Berat Ergün tarafından kurulan kulübümüz şerefli armasını 2 aydır gururla taşımaya devam ediyor. Büyük küçükyalı taraftarı arkamızda olduğu sürece daha alınacak çok kupa kazanılacak çok başarı var. Mavi beyaz renklere gönül vermiş taraftarımıza teşekkür ediyor diğer okul turnuvalarında da destek olmalarını istiyoruz. Mavi beyaz duvarın gücünü tüm üniversiteye gösterme zamanı. Teknik direktörümüz sayın Berat Ergün ve transfer komitesinin başındaki sayın Eren Özdemire başarılar diliyoruz ve onlardan her sene olduğu gibi bu senede bir kupa bekliyoruz . 💙🤍 HER ZAMAN HER YERDE EN BÜYÜK KÜÇÜKYALI HOTSPUR 💙🤍
+        </p>
     </div>
 
     <script>
@@ -61,6 +75,24 @@
 
                 animateMarquee();
             });
+
+            // Slider
+            let currentIndex = 0;
+            const slides = $('.slides .slide');
+            const slideCount = slides.length;
+
+            function showSlide(index) {
+                slides.hide();
+                slides.eq(index).show();
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % slideCount;
+                showSlide(currentIndex);
+            }
+
+            showSlide(currentIndex);
+            setInterval(nextSlide, 3000); // 3 saniyede bir slide değiştir
         });
     </script>
 </body>

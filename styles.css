@@ -13,7 +13,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #333;
+    background-color: #0059ff;
     color: #fff;
 }
 
@@ -44,7 +44,7 @@ body {
 
 .marquee {
     width: 100%;
-    background-color: #000;
+    background-color: #0004f7;
     color: #fff;
     overflow: hidden;
     white-space: nowrap;
@@ -62,13 +62,61 @@ body {
     position: absolute;
 }
 
+.slider {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+    /* Remove margin */
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+.slide img {
+    width: 100%;
+    display: block;
+    vertical-align: middle;
+    /* Remove bottom white space */
+}
+.story-divider {
+    width: 100%;
+    height: 5px;
+    background-color: #0066ff; /* Mavi renk */
+}
+
+.success-story {
+    padding: 20px;
+    background-color: #f2f2f2; /* Arka plan rengi */
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.success-story h2 {
+    color: #0066ff; /* Başlık rengi */
+}
+
+.success-story p {
+    color: #333; /* Metin rengi */
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+
 @media (max-width: 768px) {
     .nav ul {
         display: none;
         flex-direction: column;
         width: 100%;
         text-align: center;
-        background-color: #333;
+        background-color: #0059ff;
     }
 
     .nav.active ul {
@@ -78,4 +126,33 @@ body {
     .menu-icon {
         display: block;
     }
+
+
+    .slider {
+        overflow: hidden;
+        position: relative;
+        margin-bottom: -10px;
+        /* Alt boşluğu kapatmak için negatif margin */
+    }
+
+    .slides {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        margin-bottom: -10px;
+        /* Alt boşluğu kapatmak için negatif margin */
+    }
+
+    .slide {
+        min-width: 100%;
+    }
+
+    .slide img {
+        width: 100%;
+        /* Tüm görüntülerin genişliği %100 */
+        height: auto;
+        /* Otomatik yükseklik ayarı */
+        display: block;
+    }
 }
+
+
