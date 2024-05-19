@@ -6,6 +6,8 @@
 
 body {
     font-family: Arial, sans-serif;
+    margin: 0; /* Varsayılan margin'i kaldır */
+    padding: 0; /* Varsayılan padding'i kaldır */
 }
 
 .header {
@@ -66,8 +68,7 @@ body {
     width: 100%;
     overflow: hidden;
     position: relative;
-    margin: 0;
-    /* Remove margin */
+    margin: 0; /* Margin'i kaldır */
 }
 
 .slides {
@@ -84,8 +85,10 @@ body {
     width: 100%;
     display: block;
     vertical-align: middle;
-    /* Remove bottom white space */
+    border-radius: 40px;
+    padding: 5px;
 }
+
 .story-divider {
     width: 100%;
     height: 5px;
@@ -109,6 +112,49 @@ body {
     line-height: 1.5;
 }
 
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-group textarea {
+    height: 150px;
+}
+
+.form-group button {
+    background-color: #0066ff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
 
 @media (max-width: 768px) {
     .nav ul {
@@ -127,19 +173,17 @@ body {
         display: block;
     }
 
-
     .slider {
         overflow: hidden;
         position: relative;
-        margin-bottom: -10px;
-        /* Alt boşluğu kapatmak için negatif margin */
+        margin-bottom: -10px; /* Alt boşluğu kapatmak için negatif margin */
+        
     }
 
     .slides {
         display: flex;
         transition: transform 0.5s ease-in-out;
-        margin-bottom: -10px;
-        /* Alt boşluğu kapatmak için negatif margin */
+        margin-bottom: -10px; /* Alt boşluğu kapatmak için negatif margin */
     }
 
     .slide {
@@ -148,11 +192,9 @@ body {
 
     .slide img {
         width: 100%;
-        /* Tüm görüntülerin genişliği %100 */
         height: auto;
-        /* Otomatik yükseklik ayarı */
         display: block;
+        border-radius: 60px;
+        padding: 5px;
     }
 }
-
-

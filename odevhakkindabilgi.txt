@@ -1,0 +1,3 @@
+Asım Eren ÖZDEMİR : Kayan yazı ve kayan yazıya not defterinden çekilen veri sistemi , iletişim formu.
+Yiğit Boran GÜLKAN : Header ve alt bilgi yazısı tasarımı (css)
+Bilal AKTAŞ : Slider sistemi ve sliderin js kodları

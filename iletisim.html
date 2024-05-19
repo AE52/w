@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Küçükyalı Hotspur</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #0059ff;
+            color: #fff;
+        }
+
+        .logo {
+            font-size: 1.5em;
+        }
+
+        .nav {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: #0059ff;
+            transition: max-height 0.3s ease;
+            overflow: hidden;
+            max-height: 0;
+        }
+
+        .nav.active {
+            max-height: 200px; /* İçerik boyutuna göre ayarlayın */
+        }
+
+        .nav ul {
+            display: flex;
+            flex-direction: column;
+            padding: 10px 0;
+        }
+
+        .nav ul li {
+            margin: 0;
+        }
+
+        .nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1em;
+            padding: 10px 20px;
+            display: block;
+        }
+
+        .menu-icon {
+            display: block;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        .marquee {
+            width: 100%;
+            background-color: #0004f7;
+            color: #fff;
+            overflow: hidden;
+            white-space: nowrap;
+            box-sizing: border-box;
+            padding: 10px 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            white-space: nowrap;
+            position: absolute;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .slider {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: -10px;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            margin-bottom: -10px;
+        }
+
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 15px; /* Kenarları yumuşatmak için border-radius eklendi */
+        }
+
+        .form-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.8); /* Beyaz arka plan ve şeffaflık */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .container {
+            max-width: 100%;
+            padding: 0 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-group textarea {
+            height: 150px;
+        }
+
+        .form-group button {
+            background-color: #0066ff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .story-divider {
+            width: 100%;
+            height: 5px;
+            background-color: #0066ff;
+        }
+
+        .success-story {
+            padding: 20px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+            margin-top: 20px;
+            max-width: 100%;
+        }
+
+        .success-story h2 {
+            color: #0066ff;
+        }
+
+        .success-story p {
+            color: #333;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                background-color: #0059ff;
+            }
+
+            .nav.active ul {
+                display: flex;
+            }
+
+            .menu-icon {
+                display: block;
+            }
+
+            .slides {
+                display: flex;
+                transition: transform 0.5s ease-in-out;
+            }
+
+            .slide {
+                min-width: 100%;
+            }
+
+            .slide img {
+                width: 100%;
+                height: 75vh;
+                display: block;
+                border-radius: 15px;
+            }
+        }
+    
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">Küçükyalı Hotspur</div>
+        <nav class="nav">
+            <ul>
+                <li><a href="index.html">Anasayfa</a></li>
+                <li><a href="#">İletişim</a></li>
+            </ul>
+        </nav>
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    </header>
+
+    <div class="marquee">
+        <div class="marquee-content" id="marquee-text">KÜÇÜKYALI HOTSPUR 💙🤍 - KADROMUZ: 10. Asım Eren ÖZDEMİR (K) - 7. Berat ERGÜN - 9. Ali Kemal...</div>
+    </div>
+
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slides">
+                <div class="slide"><img src="img/image1.jpg" alt="Slide 1"></div>
+                <div class="slide"><img src="img/image3.jpg" alt="Slide 3"></div>
+            </div>
+        </div>
+        <div class="form-overlay">
+            <div class="container">
+                <h1>İletişim Formu</h1>
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <label for="name">Adınız Soyadınız</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-posta Adresiniz</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mesajınız (MAKSİMUM 100 KARAKTER!!)</label>
+                        <textarea id="message" name="message" maxlength="100" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Gönder</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="success-story">
+        <h2>Küçükyalı Hotspur</h2>
+        <p>
+            Küçükyalı Hotspur, kurucularımız Eren Özdemir ve Berat Ergün tarafından kurulan kulübümüz şerefli armasını 2 aydır gururla taşımaya devam ediyor. Büyük küçükyalı taraftarı arkamızda olduğu sürece daha alınacak çok kupa kazanılacak çok başarı var. Mavi beyaz renklere gönül vermiş taraftarımıza teşekkür ediyor diğer okul turnuvalarında da destek olmalarını istiyoruz. Mavi beyaz duvarın gücünü tüm üniversiteye gösterme zamanı. Teknik direktörümüz sayın Berat Ergün ve transfer komitesinin başındaki sayın Eren Özdemire başarılar diliyoruz ve onlardan her sene olduğu gibi bu senede bir kupa bekliyoruz . 💙🤍 HER ZAMAN HER YERDE EN BÜYÜK KÜÇÜKYALI HOTSPUR 💙🤍
+        </p>
+    </div>
+    
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/1LDY1vw3S7I0mxqWqkCzF0?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.querySelector('.nav');
+            nav.classList.toggle('active');
+        }
+
+        $(document).ready(function() {
+            // Sayfa yüklendiğinde nav active sınıfını kaldır
+            $('.nav').removeClass('active');
+
+            // Marquee
+            function fetchMarqueeText() {
+                $.ajax({
+                    url: 'data.txt',
+                    success: function(data) {
+                        $('#marquee-text').text(data);
+                    },
+                    error: function() {
+                        console.error("Dosya yüklenemedi.");
+                    }
+                });
+            }
+
+            fetchMarqueeText();
+            setInterval(fetchMarqueeText, 30000); // Veriyi her 30 saniyede bir yenile
+
+            const marqueeText = $('#marquee-text');
+            marqueeText.on('DOMNodeInserted', function() {
+                const textWidth = marqueeText.width();
+                const containerWidth = $('.marquee').width();
+
+                marqueeText.css({ left: containerWidth });
+
+                function animateMarquee() {
+                    marqueeText.css({ left: containerWidth });
+                    marqueeText.animate({ left: -textWidth }, 10000, 'linear', animateMarquee);
+                }
+
+                animateMarquee();
+            });
+
+            // Slider
+            let currentIndex = 0;
+            const slides = $('.slides .slide');
+            const slideCount = slides.length;
+
+            function showSlide(index) {
+                const offset = -index * 100;
+                $('.slides').css('transform', `translateX(${offset}%)`);
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % slideCount;
+                showSlide(currentIndex);
+            }
+
+            showSlide(currentIndex);
+            setInterval(nextSlide, 3000); // 3 saniyede bir slide değiştir
+        });
+    </script>
+</body>
+</html>
