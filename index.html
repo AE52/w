@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KÜÇÜKYALI HOTSPUR</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">KÜÇÜKYALI HOTSPUR</div>
+        <nav class="nav">
+            <ul>
+                <li><a href="#">Anasayfa</a></li>
+                <li><a href="#">Hakkımızda</a></li>
+                <li><a href="#">Hizmetler</a></li>
+                <li><a href="#">İletişim</a></li>
+            </ul>
+        </nav>
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    </header>
+
+    <div class="marquee">
+        <div class="marquee-content" id="marquee-text"></div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.querySelector('.nav');
+            nav.classList.toggle('active');
+        }
+
+        $(document).ready(function() {
+            function fetchMarqueeText() {
+                $.ajax({
+                    url: 'data.txt',
+                    success: function(data) {
+                        $('#marquee-text').text(data);
+                    },
+                    error: function() {
+                        console.error("Dosya yüklenemedi.");
+                    }
+                });
+            }
+
+            fetchMarqueeText();
+            setInterval(fetchMarqueeText, 60000); // Veriyi her 60 saniyede bir yenile
+
+            const marqueeText = $('#marquee-text');
+            marqueeText.on('DOMNodeInserted', function() {
+                const textWidth = marqueeText.width();
+                const containerWidth = $('.marquee').width();
+
+                marqueeText.css({ left: containerWidth });
+
+                function animateMarquee() {
+                    marqueeText.css({ left: containerWidth });
+                    marqueeText.animate({ left: -textWidth }, 10000, 'linear', animateMarquee);
+                }
+
+                animateMarquee();
+            });
+        });
+    </script>
+</body>
+</html>
